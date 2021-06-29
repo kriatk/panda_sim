@@ -1,0 +1,2 @@
+franka_description:gazebo-conveyor:panda_control:panda_simulation
+-DCATKIN_DEVEL_PREFIX=/home/kriatk/panda_catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kriatk/panda_catkin_ws/install -G Unix Makefiles
