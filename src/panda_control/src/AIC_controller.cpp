@@ -30,7 +30,7 @@ int main(int argc, char **argv)
   // Variable for desired position, set here the goal for the Panda for each joint
   std::vector<double> desiredPos1(7), desiredPos2(7), desiredPos3(7);
 
-
+/*
   desiredPos1[0] = 1;
   desiredPos1[1] = 0.5;
   desiredPos1[2] = 0.0;
@@ -38,7 +38,16 @@ int main(int argc, char **argv)
   desiredPos1[4] = 0.0;
   desiredPos1[5] = 2.5;
   desiredPos1[6] = 0.0;
+*/
 
+ // x=0.4789 y=0.364 z=0.2062
+  desiredPos1[0] = 0.65;
+  desiredPos1[1] = 0.3;
+  desiredPos1[2] = 0.0;
+  desiredPos1[3] = -2;
+  desiredPos1[4] = 0.0;
+  desiredPos1[5] = 2.3;
+  desiredPos1[6] = 0.0;
 
 
   desiredPos2[0] = 0.0;

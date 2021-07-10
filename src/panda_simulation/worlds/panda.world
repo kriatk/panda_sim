@@ -115,7 +115,7 @@
 <!-- object model -->
 
     <model name="object">
-        <pose>0.35 1.5 1.0 0 0 0</pose>
+        <pose>0.48 1.5 1.0 0 0 0</pose>
         <static>false</static>
         <link name="obj_link">
           <inertial>
