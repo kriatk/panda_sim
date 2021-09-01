@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """ """
 
-__author__ = 'Alban Bornet'
-
 import rospy
 import os
 import torch
