@@ -20,7 +20,7 @@ from specs           import localize_target, complete_target_positions, mark_tar
 
 module_name='predidctive_coding' 
 steps=1 
-underSmpl=5 
+underSmpl=1 
 nt=10 
 t_extrap=5 
 n_feat=1 
@@ -31,7 +31,7 @@ use_new_w=False
 use_trained_w=True
 do_train=False
 lr=1e-2
-epoch_loop=50
+epoch_loop=100
 
 class PredictiveCoding:
 
@@ -54,8 +54,15 @@ class PredictiveCoding:
         self.max_pix_value  = max_pix_value  # Depends on what's inside the PredNet code
         self.normalizer     = 255.0/self.max_pix_value
         self.C_channels     = C_channels     # 1 or 3 (number of color channels)
-        self.A_channels     = (self.C_channels, self.n_feat*4, self.n_feat*8, self.n_feat*16)
+ 
+        self.A_channels     = (self.C_channels, self.n_feat*4, self.n_feat*8, self.n_feat*16) #4 layers
         self.R_channels     = (self.C_channels, self.n_feat*4, self.n_feat*8, self.n_feat*16)
+
+
+#        self.A_channels     = (self.C_channels, self.n_feat*4) #2 layers
+#        self.R_channels     = (self.C_channels, self.n_feat*4)
+
+
         self.scale          = scale          # 2 or 4 (how much layers down/upsample images)
         self.pad            = 8 if self.scale == 4 else 0  # For up/downsampling to work
         self.model_name     = 'model' + str(self.n_feat)+'.pt'
@@ -197,6 +204,10 @@ class PredictiveCoding:
                         # Print loss or prediction messages
                         if self.do_train:
                             rospy.loginfo('Epoch: %2i - step: %2i - error: %5.4f - lr: %5.4f' % (int(self.running_step/self.epoch_loop), self.running_step % self.epoch_loop, loss.item(), self.scheduler.get_lr()[0]))
+                            file = open('train_data.txt','a')
+                            file.write('\nEpoch: %2i - step: %2i - error: %5.4f - lr: %5.4f' % (int(self.running_step/self.epoch_loop), self.running_step % self.epoch_loop, loss.item(), self.scheduler.get_lr()[0]))
+                            file.close()
+
                         else:
                             rospy.loginfo('Prediction for future target locations: ' + str(targ_pos))
 
@@ -218,8 +229,7 @@ class PredictiveCoding:
                         pos_4d_msg = [p for pos in pos_3d_msg for p in pos]                           # Flatten the list
                         layout_msg = MultiArrayLayout(dim=[MultiArrayDimension(size=d) for d in [len(targ_pos), 4]])
                         self.pred_pos_pub.publish(Float32MultiArray(layout=layout_msg, data=pos_4d_msg))
-                        print(layout_msg)
-                        print(pos_4d_msg)
+
 
                     # Collect input frames
                     inpt_msg = torch.zeros(img_shp[0], img_shp[1]*(self.nt-self.t_extrap+1), img_shp[2])

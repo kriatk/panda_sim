@@ -26,6 +26,7 @@ int main(int argc, char **argv)
   // Variable for desired position, set here the goal for the Panda for each joint
   std::vector<double> desiredPos1(7), desiredPos2(7), desiredPos3(7);
 
+/*
   desiredPos1[0] = 1;
   desiredPos1[1] = 0.5;
   desiredPos1[2] = 0.0;
@@ -33,6 +34,17 @@ int main(int argc, char **argv)
   desiredPos1[4] = 0.0;
   desiredPos1[5] = 2.5;
   desiredPos1[6] = 0.0;
+*/
+
+ // x=0.4789 y=0.364 z=0.2062
+  desiredPos1[0] = 0.65;
+  desiredPos1[1] = 0.3;
+  desiredPos1[2] = 0.0;
+  desiredPos1[3] = -2;
+  desiredPos1[4] = 0.0;
+  desiredPos1[5] = 2.3;
+  desiredPos1[6] = 0.0;
+
 
   desiredPos2[0] = 0.0;
   desiredPos2[1] = 0.2;
@@ -54,7 +66,7 @@ int main(int argc, char **argv)
   // Object of the class MRAC which will take care of everything
   MRAC MRAC_controller;
   // Set desired position in the MRAC class
-  MRAC_controller.setGoal(desiredPos1);
+  MRAC_controller.setGoal(desiredPos2);
 
   // Main loop
   // Main loop
@@ -67,14 +79,14 @@ int main(int argc, char **argv)
     if ((count!=0)&&(MRAC_controller.dataReady()==1)){
       MRAC_controller.computeControlInput();
       cycles ++;
-      if (cycles == 3000){
+      if (cycles == 4000){
+        MRAC_controller.setGoal(desiredPos1);
+      }
+
+      if (cycles == 8000){
         MRAC_controller.setGoal(desiredPos2);
       }
-
-      if (cycles == 6000){
-        MRAC_controller.setGoal(desiredPos3);
-      }
-
+/*
       if (cycles == 9000){
         MRAC_controller.setGoal(desiredPos2);
       }
@@ -82,7 +94,7 @@ int main(int argc, char **argv)
       if (cycles == 12000){
         MRAC_controller.setGoal(desiredPos1);
         cycles = 0;
-      }
+      }*/
     }
     else
       count ++;

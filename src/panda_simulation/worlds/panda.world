@@ -204,15 +204,15 @@
                 <near>0.1</near>
                 <far>100</far>
               </clip>
-              <noise>
+<!--               <noise>
                 <type>gaussian</type>
-                <!-- Noise is sampled independently per pixel on each frame.
+-->               <!-- Noise is sampled independently per pixel on each frame.
                      That pixel's noise value is added to each of its color
                      channels, which at that point lie in the range [0,1]. -->
-                <mean>0.0</mean>
+<!--                <mean>0.0</mean>
                 <stddev>0.007</stddev>
-              </noise>
-            </camera>
+              </noise> 
+-->         </camera>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
               <alwaysOn>true</alwaysOn>
               <updateRate>30.0</updateRate>

@@ -1,6 +1,7 @@
 /*
  * File:   AIC.cpp
  * Author: Corrado Pezzato, TU Delft, DCSC
+ * Edited: Kristijonas Atkociunas, DTU
  *
  * Created on April 14th, 2019
  *

@@ -1,6 +1,7 @@
 /*
  * File:   AIC_controller.cpp
  * Author: Corrado Pezzato, TU Delft, DCSC
+ * Edited: Kristijonas Atkociunas, DTU 
  *
  * Created on April 14th, 2019
  *
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
   desiredPos2[5] = 1.2;
   desiredPos2[6] = 0.0;
 
-  desiredPos3[0] = -1;
+  desiredPos3[0] = 1.6;
   desiredPos3[1] = 0.5;
   desiredPos3[2] = 0.0;
   desiredPos3[3] = -1.2;
@@ -85,31 +86,15 @@ int main(int argc, char **argv)
       AIC_controller.minimiseF();
       cycles ++;
       if (trig == 1){
+
         AIC_controller.setGoal(desiredPos1);
         cycles = 0;
       }
-      if (cycles == 6000){
+      if (cycles == 8000){
         AIC_controller.setGoal(desiredPos2);
         cycles = 0;
       }
 
-/*      if (cycles == 6000){
-        AIC_controller.setGoal(desiredPos2);
-      }
-
-      if (cycles == 12000){
-        AIC_controller.setGoal(desiredPos2);
-      }
-
-      if (cycles == 18000){
-        AIC_controller.setGoal(desiredPos2);
-      }
-
-      if (cycles == 24000){
-        AIC_controller.setGoal(desiredPos2);
-        cycles = 0;
-      }
-*/
     }
     else
       count ++;
